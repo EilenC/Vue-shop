@@ -16,11 +16,16 @@ module.exports = {
 
   rules: {
     'no-console': 'off',
-    'no-debugger': 'off'
+    'no-debugger': 'off',
+    'space-before-function-paren': 0,
+    'no-unused-vars':0,
+    'no-trailing-spaces':0,
+    'no-useless-return':0,
+    'vue/no-unused-vars':0
   },
 
   'extends': [
-    'plugin:vue/recommended',
+    'plugin:vue/essential',
     '@vue/standard'
   ]
 }
