@@ -21,7 +21,9 @@ module.exports = {
     'no-unused-vars':0,
     'no-trailing-spaces':0,
     'no-useless-return':0,
-    'vue/no-unused-vars':0
+    'vue/no-unused-vars':0,
+    'eol-last':0,
+    'padded-blocks':0
   },
 
   'extends': [

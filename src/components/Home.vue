@@ -10,9 +10,11 @@
         <span>{{loginName}} 管理后台</span>
       </div>
       <el-button
-        type="info"
+        type="danger"
         @click="logout"
-      >Sign Out</el-button>
+        size="mini"
+        round
+      >注销</el-button>
     </el-header>
     <el-container>
       <!-- 页面主体 -->
@@ -121,7 +123,8 @@ export default {
   height: 100%;
 }
 .el-header {
-  padding-left: 10px;
+  padding-left: 25px;
+  padding-right: 40px;
   align-items: center;
   color: #fff;
   font-size: 20px;
