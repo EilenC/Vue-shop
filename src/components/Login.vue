@@ -36,6 +36,7 @@
           <el-button
             type="primary"
             @click="login"
+            :loading="loginLoading"
           >登录</el-button>
           <el-button
             type="info"
@@ -51,6 +52,7 @@
 export default {
   data() {
     return {
+      loginLoading: false,
       loginForm: {
         username: 'admin',
         password: '123456'
@@ -76,17 +78,30 @@ export default {
       this.$refs.loginFormRef.resetFields()
     },
     login() {
+      this.loginLoading = true
       this.$refs.loginFormRef.validate(async valid => {
         if (valid) {
           // eslint-disable-next-line no-undef
           const { data: result } = await this.$http.post(
             'login',
             this.loginForm
-          )
+          // eslint-disable-next-line handle-callback-err
+          ).catch(err => {
+            // console.log(err.code)
+            // this.loginLoading = false
+            // if (err.code === 'ECONNABORTED') {
+            //   this.$message.error('oooops!服务器连接出现问题!') 
+            // }
+          })
+          if (result.meta === 'error') {
+            this.$message.error('oooops!服务器连接出现问题!')
+            this.loginLoading = false 
+            return
+          }
           if (result.meta.status !== 200) {
             this.$message({
               showClose: true,
-              message: 'Error!',
+              message: 'Login Error!',
               type: 'error'
             })
           } else {

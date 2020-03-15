@@ -355,6 +355,10 @@ export default {
       const { data: result } = await this.$http.get('users', {
         params: this.queryInfo
       })
+      if (result.meta === 'error') {
+        this.$message.error('oooops!服务器连接出现问题!')
+        return 
+      }
       if (result.meta.status !== 200) {
         return this.$message.error('获取用户失败!')
       }
@@ -373,6 +377,10 @@ export default {
       const { data: result } = await this.$http.put(
         `users/${userInfo.id}/state/${userInfo.mg_state}`
       )
+      if (result.meta === 'error') {
+        this.$message.error('oooops!服务器连接出现问题!')
+        return 
+      }
       if (result.meta.status !== 200) {
         userInfo.mg_state = !userInfo.mg_state
         return this.$message.error('更新用户状态失败')
@@ -391,6 +399,10 @@ export default {
           return
         }
         const { data: result } = await this.$http.post('users', this.addForm)
+        if (result.meta === 'error') {
+          this.$message.error('oooops!服务器连接出现问题!')
+          return 
+        }
         if (result.meta.status !== 201) {
           this.$message.error('添加用户失败!')
         }
@@ -401,6 +413,10 @@ export default {
     },
     async showEditDialog(id, username) {
       const { data: result } = await this.$http.get('users/' + id)
+      if (result.meta === 'error') {
+        this.$message.error('oooops!服务器连接出现问题!')
+        return 
+      }
       if (result.meta.status !== 200) {
         return this.$message.error('查询用户 "' + username + '" 失败!')
       }
@@ -422,6 +438,10 @@ export default {
             mobile: this.editForm.mobile
           }
         )
+        if (result.meta === 'error') {
+          this.$message.error('oooops!服务器连接出现问题!')
+          return 
+        }
         if (result.meta.status !== 200) {
           this.$message.error('更新用户"' + this.editForm.username + '" 失败!')
         }
@@ -442,6 +462,10 @@ export default {
       )
         .then(async () => {
           const { data: result } = await this.$http.delete('users/' + id)
+          if (result.meta === 'error') {
+            this.$message.error('oooops!服务器连接出现问题!')
+            return 
+          }
           if (result.meta.status !== 200) {
             return this.$message.error('删除用户 "' + username + '" 失败!')
           }
@@ -457,6 +481,10 @@ export default {
     },
     async setRole(userInfo) {
       const { data: result } = await this.$http.get('roles')
+      if (result.meta === 'error') {
+        this.$message.error('oooops!服务器连接出现问题!')
+        return 
+      }
       if (result.meta.status !== 200) {
         return this.$message.error('获取角色列表失败!')
       }
@@ -472,6 +500,10 @@ export default {
       const { data: result } = await this.$http.put(`users/${this.nowUserObj.id}/role`, {
         rid: this.selectRoleId
       })
+      if (result.meta === 'error') {
+        this.$message.error('oooops!服务器连接出现问题!')
+        return 
+      }
       if (result.meta.status !== 200) {
         return this.$message.error('分配用户 "' + this.nowUserObj.username + '" 新角色失败!')
       }

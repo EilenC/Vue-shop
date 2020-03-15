@@ -217,6 +217,10 @@ export default {
       const { data: result } = await this.$http.get('categories', {
         params: this.queryInfo
       })
+      if (result.meta === 'error') {
+        this.$message.error('oooops!服务器连接出现问题!')
+        return 
+      }
       if (result.meta.status !== 200) {
         return this.$message.error('获取商品分类失败!')
       }
@@ -245,6 +249,10 @@ export default {
           type: type
         }
       })
+      if (result.meta === 'error') {
+        this.$message.error('oooops!服务器连接出现问题!')
+        return 
+      }
       if (result.meta.status !== 200) {
         return this.$message.error('获取父级分类失败!')
       }
@@ -280,6 +288,10 @@ export default {
           return
         }
         const { data: result } = await this.$http.post('categories', this.addCateForm)
+        if (result.meta === 'error') {
+          this.$message.error('oooops!服务器连接出现问题!')
+          return 
+        }
         if (result.meta.status !== 201) {
           return this.$message.error('添加分类 "' + this.addCateForm.cat_name + '" 失败!')
         }

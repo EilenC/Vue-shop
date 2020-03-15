@@ -160,6 +160,10 @@ export default {
   methods: {
     async getRoleList() {
       const { data: result } = await this.$http.get('roles')
+      if (result.meta === 'error') {
+        this.$message.error('oooops!服务器连接出现问题!')
+        return 
+      }
       if (result.meta.status !== 200) {
         return this.$message.error('获取角色列表失败!')
       }
@@ -188,6 +192,10 @@ export default {
       const { data: result } = await this.$http.delete(
         `roles/${roles.id}/rights/${rightId}`
       )
+      if (result.meta === 'error') {
+        this.$message.error('oooops!服务器连接出现问题!')
+        return 
+      }
       if (result.meta.status !== 200) {
         return this.$message.error('删除角色 "' + roles.roleName + '" 权限失败')
       }
@@ -197,7 +205,10 @@ export default {
     async showSetRightDialog(roles) {
       // 获取权限列表
       const { data: result } = await this.$http.get('rights/tree')
-
+      if (result.meta === 'error') {
+        this.$message.error('oooops!服务器连接出现问题!')
+        return 
+      }
       if (result.meta.status !== 200) {
         return this.$message.error('获取权限列表失败')
       }
@@ -232,7 +243,10 @@ export default {
       const { data: result } = await this.$http.post(`roles/${this.nowRoleObj.id}/rights`, {
         rids: idKeys
       })
-
+      if (result.meta === 'error') {
+        this.$message.error('oooops!服务器连接出现问题!')
+        return 
+      }
       if (result.meta.status !== 200) {
         return this.$message.error('分配 "' + this.nowRoleObj.roleName + '" 权限列表失败!')
       }

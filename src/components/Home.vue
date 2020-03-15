@@ -103,6 +103,10 @@ export default {
     },
     async getMenuList() {
       const { data: result } = await this.$http.get('menus')
+      if (result.meta === 'error') {
+        this.$message.error('oooops!服务器连接出现问题!')
+        return 
+      }
       if (result.meta.status !== 200) return this.$message.error(result.meta.msg)
       this.menulist = result.data
     },

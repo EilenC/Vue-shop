@@ -38,6 +38,10 @@ export default {
   methods: {
     async getRightList() {
       const { data: result } = await this.$http.get('rights/list')
+      if (result.meta === 'error') {
+        this.$message.error('oooops!服务器连接出现问题!')
+        return 
+      }
       if (result.meta.status !== 200) {
         return this.$message.error('获取权限列表失败!')
       }
