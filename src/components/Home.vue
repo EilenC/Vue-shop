@@ -12,7 +12,7 @@
       <el-button
         type="danger"
         @click="logout"
-        size="mini"
+        size="small"
         round
       >注销</el-button>
     </el-header>
@@ -124,7 +124,7 @@ export default {
 }
 .el-header {
   padding-left: 25px;
-  padding-right: 40px;
+  padding-right: 25px;
   align-items: center;
   color: #fff;
   font-size: 20px;

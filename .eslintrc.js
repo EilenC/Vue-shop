@@ -23,7 +23,8 @@ module.exports = {
     'no-useless-return':0,
     'vue/no-unused-vars':0,
     'eol-last':0,
-    'padded-blocks':0
+    'padded-blocks':0,
+    
   },
 
   'extends': [
