@@ -1,5 +1,9 @@
 <template>
-  <div class="login_container">
+  <div class="login_container"     
+    v-loading="loginLoading"
+    element-loading-text="拼命加载中"
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(0, 0, 0, 0.8)">
     <div class="login_box">
       <!-- 头像区域 -->
       <div class="avatar_box">

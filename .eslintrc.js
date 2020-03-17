@@ -24,6 +24,7 @@ module.exports = {
     'vue/no-unused-vars':0,
     'eol-last':0,
     'padded-blocks':0,
+    'eqeqeq': 0
     
   },
 
