@@ -15,6 +15,7 @@
             clearable
             @clear="getUserList"
             v-model="queryInfo.query"
+            @keyup.enter.native="getUserList"
           >
             <el-button
               slot="append"
@@ -420,7 +421,7 @@ export default {
       if (result.meta.status !== 200) {
         return this.$message.error('查询用户 "' + username + '" 失败!')
       }
-      this.$message.success('查询用户 "' + username + '" 成功!')
+      // this.$message.success('查询用户 "' + username + '" 成功!')
 
       this.editForm = result.data
       this.editUserDialogVisible = true
