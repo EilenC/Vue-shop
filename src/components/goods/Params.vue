@@ -372,7 +372,6 @@ export default {
             attr_sel: this.activeName
           }
         )
-
         if (result.meta === 'error') {
           this.$message.error('oooops!服务器连接出现问题!')
           return
