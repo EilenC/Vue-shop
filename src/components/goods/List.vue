@@ -49,6 +49,18 @@
           prop="goods_name"
         ></el-table-column>
         <el-table-column
+          label="缩略图"
+          width="100px"
+          align="center"
+          header-align="center"
+          style="padding:0"
+        >
+        <!-- 商品列表缩略图 -->
+          <template slot-scope="scope">
+            <img :src="scope.row.goods_pic" width="65" height="65" @click="showImgDialog(scope.row)">
+          </template>
+        </el-table-column>
+        <el-table-column
           label="商品价格(元)"
           prop="goods_price"
           width="100px"
@@ -56,9 +68,9 @@
           header-align="center"
         ></el-table-column>
         <el-table-column
-          label="商品重量"
+          label="商品重量/KG"
           prop="goods_weight"
-          width="80px"
+          width="100px"
           align="center"
           header-align="center"
         ></el-table-column>
@@ -117,6 +129,14 @@
       >
       </el-pagination>
     </el-card>
+    <!-- 图片预览Dialog -->
+    <el-dialog
+      :title="'商品: '+goodTitName+' 预览'"
+      :visible.sync="imgDialogVisible"
+      :center="true"
+      width="50%">
+      <img :src="goodPicPath" alt="缩略图" style="width:100%">
+    </el-dialog>
   </div>
 </template>
 
@@ -127,11 +147,14 @@ export default {
       queryInfo: {
         query: '',
         pagenum: 1,
-        pagesize: 5
+        pagesize: 3
       },
       goodlist: [],
       total: 0,
-      addGoodsDialogVisible: false
+      addGoodsDialogVisible: false,
+      goodTitName: '',
+      goodPicPath: '',
+      imgDialogVisible: false
     }
   },
   created() {
@@ -197,6 +220,11 @@ export default {
     },
     addGoods() {
       this.$router.push('/goods/add')
+    },
+    showImgDialog(row) {
+      this.goodTitName = row.goods_name.length > 20 ? row.goods_name.substring(0, 17) + '...' : row.goods_name
+      this.goodPicPath = row.pic ? row.pic : row.goods_pic
+      this.imgDialogVisible = true
     }
   }
 }

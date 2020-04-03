@@ -38,10 +38,10 @@
                     <el-form-item label="商品名称" prop="goods_name">
                         <el-input v-model="addForm.goods_name" placeholder=""></el-input>
                     </el-form-item>
-                    <el-form-item label="商品价格" prop="goods_price">
+                    <el-form-item label="商品价格(保留2位小数)" prop="goods_price">
                         <el-input v-model="addForm.goods_price" placeholder=""></el-input>
                     </el-form-item>
-                    <el-form-item label="商品重量" prop="goods_weight">
+                    <el-form-item label="商品重量/KG(保留两位小数)" prop="goods_weight">
                         <el-input v-model="addForm.goods_weight" placeholder=""></el-input>
                     </el-form-item>
                     <el-form-item label="商品数量" prop="goods_number">
@@ -76,6 +76,7 @@
                 </el-tab-pane>
                 <el-tab-pane label="商品图片" name="3">
                     <el-upload
+                    :on-change="imgPreview"
                     :headers="headersObj"
                     :action="upLoadURL"
                     :on-preview="handlePreview"
@@ -149,7 +150,7 @@ export default {
           { required: true, message: '请输入商品价格', trigger: 'blur' }
         ],
         goods_weight: [
-          { required: true, message: '请输入商品重量', trigger: 'blur' }
+          { required: true, message: '请输入商品重量/KG', trigger: 'blur' }
         ],
         goods_number: [
           { required: true, message: '请输入商品数量', trigger: 'blur' }
@@ -159,10 +160,12 @@ export default {
         ]
       },
       previewPath: '',
-      imgDialogVisible: false
+      imgDialogVisible: false,
+      imgParam: ''
     }
   },
   created() {
+    this.imgParam = new FormData()
     this.getCateList()
   },
   methods: {
@@ -259,6 +262,7 @@ export default {
     },
     // 添加商品按钮事件
     add() {
+      console.log(this.imgParam)
       this.$refs.addFormRef.validate(async (valid) => {
         if (!valid) {
           return this.$message.error('请填写完整商品的必要的信息!')
@@ -301,6 +305,17 @@ export default {
         // 跳转回商品首页
         this.$router.push('/goods')
       })
+    },
+    imgPreview(file, fileList) {
+      const fileName = file.name
+      const regex = /(.jpg|.jpeg|.gif|.png|.bmp)$/
+      if (regex.test(fileName.toLowerCase())) {
+        // this.formMovie.posterURL = file.url
+        return file
+      } else {
+        fileList.pop()
+        this.$message.error('请选择图片文件!')
+      }
     }
   },
   computed: {
