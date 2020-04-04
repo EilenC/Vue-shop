@@ -11,12 +11,16 @@
       <el-row>
         <el-col :span="7">
           <el-input
+            v-model="queryInfo.query"
+            @keyup.enter.native="getOrderList"
+            @clear="getOrderList"
             placeholder="请输入内容"
             clearable
           >
             <el-button
               slot="append"
               icon="el-icon-search"
+              @click="getOrderList"
             ></el-button>
           </el-input>
         </el-col>
@@ -187,7 +191,7 @@ export default {
     },
     async showProgress() {
       const { data: result } = await this.$http.get(
-        '/kuaidi/1106975712662'
+        '/exp/4303791423625'
       )
       if (result.meta === 'error') {
         this.$message.error('oooops!服务器连接出现问题!')
