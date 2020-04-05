@@ -47,7 +47,8 @@ Vue.component('tree-table', TreeTable)
 Vue.use(VueQuillEditor)
 
 // axios.defaults.baseURL = 'http://192.168.199.233:8888/api/private/v1/'
-axios.defaults.baseURL = 'http://api.tp5.com/api/v1/'
+// axios.defaults.baseURL = 'http://api.tp5.com/api/v1/'
+axios.defaults.baseURL = 'http://api.eilen.top:8081/api/v1/'
 // 设置连接服务器超时时间,单位毫秒
 axios.defaults.timeout = 5000
 
