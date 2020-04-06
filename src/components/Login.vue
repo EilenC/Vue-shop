@@ -58,8 +58,8 @@ export default {
     return {
       loginLoading: false,
       loginForm: {
-        username: 'admin',
-        password: '123456'
+        username: '',
+        password: ''
       },
       rules: {
         username: [
@@ -103,6 +103,7 @@ export default {
             return
           }
           if (result.meta.status !== 200) {
+            this.loginLoading = false
             this.$message({
               showClose: true,
               message: 'Login Error!',
