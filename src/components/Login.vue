@@ -33,6 +33,7 @@
             prefix-icon="iconfont icon-mima"
             v-model="loginForm.password"
             type="password"
+            @keyup.enter.native="login"
           ></el-input>
         </el-form-item>
 
@@ -41,11 +42,11 @@
             type="primary"
             @click="login"
             :loading="loginLoading"
-          >登录</el-button>
+          >Login</el-button>
           <el-button
             type="info"
             @click="resetLoginForm"
-          >重置</el-button>
+          >Reset</el-button>
         </el-form-item>
       </el-form>
     </div>
